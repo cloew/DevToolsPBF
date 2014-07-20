@@ -31,7 +31,7 @@ class NewTemplateCommand:
         categoryName, commandName = GetCommandCategoryAndCommand(filepath)
         packageRootDirectory = GetPythonPackageRootForFilename(filepath)
         if packageRootDirectory is not None:
-            packageRoot = GetBasename(GetPythonPackageRootForFilename(filepath))
+            packageRoot = GetBasename(packageRootDirectory)
         else:
             print "Destination is not within a Python Directory. You'll need to manually set the Templates path"
             packageRoot = "# Set Proper Template Path -- "
