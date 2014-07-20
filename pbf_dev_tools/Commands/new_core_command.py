@@ -1,5 +1,5 @@
 from pbf.Commands import command_manager
-from pbf.Commands.PBF.new_command import NewCommand
+from pbf_dev_tools.Commands.new_command import NewCommand
 
 import os
 

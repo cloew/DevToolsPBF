@@ -10,6 +10,7 @@ from pbf_python.Commands.mk_pydir import MakePyDir
 
 from pbf.templates import template_manager
 from pbf_dev_tools.templates import TemplatesRoot
+
 import os
 
 class MakePBFPackage:
