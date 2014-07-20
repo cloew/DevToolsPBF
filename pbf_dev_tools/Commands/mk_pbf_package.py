@@ -2,11 +2,11 @@ from pbf.Commands import command_manager
 
 from pbf.Commands.PBF.new_pbf_properties import NewPbfProperties
 from pbf.Commands.PBF.insert_pbf_package import InsertPbfPackage
-from pbf.Commands.Python.mk_pydir import MakePyDir  # Should get moved into pbf_python...
 
 from pbf.helpers.file_helper import CreateDirectoryIfItDoesNotExist
 
 from pbf_dev_tools.Commands.mk_templates_dir import MakeTemplatesDirectory
+from pbf_python.Commands.mk_pydir import MakePyDir
 
 from pbf.templates import template_manager
 from pbf_dev_tools.templates import TemplatesRoot
