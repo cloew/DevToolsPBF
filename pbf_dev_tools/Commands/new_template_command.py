@@ -2,8 +2,8 @@ from pbf.Commands import command_manager
 
 from pbf.helpers.file_helper import GetBasename
 from pbf.helpers.filename_helper import GetPythonClassnameFromFilename
-from pbf.helpers.PBF.command_helper import GetCommandClassName, GetCommandCategoryAndCommand # Need to get transferred here
 
+from pbf_dev_tools.helpers.command_helper import GetCommandClassName, GetCommandCategoryAndCommand
 from pbf_python.helpers.python_helper import GetPythonPackageRootForFilename
 
 from pbf.templates import template_manager
