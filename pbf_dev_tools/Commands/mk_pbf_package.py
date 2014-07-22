@@ -1,18 +1,5 @@
 from pbf.Commands import command_manager
 
-from pbf.Commands.PBF.new_pbf_properties import NewPbfProperties
-from pbf.Commands.PBF.insert_pbf_package import InsertPbfPackage
-
-from pbf.helpers.file_helper import CreateDirectoryIfItDoesNotExist
-
-from pbf_dev_tools.Commands.mk_templates_dir import MakeTemplatesDirectory
-from pbf_python.Commands.mk_pydir import MakePyDir
-
-from pbf.templates import template_manager
-from pbf_dev_tools.templates import TemplatesRoot
-
-import os
-
 class MakePBFPackage:
     """ Command to make a new PBF Package """
     category = "mk"
@@ -34,6 +21,7 @@ class MakePBFPackage:
         
     def createNewPackage(self, packagePath, packageName):
         """ Create a new PBF Pacakge """
+        from pbf.helpers.file_helper import CreateDirectoryIfItDoesNotExist
         CreateDirectoryIfItDoesNotExist(packagePath)
         
         self.createPackageDirectories(packagePath, packageName)
@@ -42,6 +30,9 @@ class MakePBFPackage:
         
     def createPackageDirectories(self, packagePath, packageName):
         """ Create Pacakge Directories """
+        from pbf_python.Commands.mk_pydir import MakePyDir
+        import os
+        
         currentDirectory = packagePath
         pythonDirectoryMaker = MakePyDir()
         
@@ -53,16 +44,25 @@ class MakePBFPackage:
         
     def createTemplatesDirectory(self, pbfPackageRoot):
         """ Creates the templates Directory in the directory given """
+        from pbf_dev_tools.Commands.mk_templates_dir import MakeTemplatesDirectory
+        
         templateDirectoryMaker = MakeTemplatesDirectory()
         templateDirectoryMaker.makeTemplatesDirectory(pbfPackageRoot)
         
     def createPBFProperties(self, packagePath, packageName):
         """ Creates the templates Directory in the directory given """
+        from pbf.Commands.PBF.new_pbf_properties import NewPbfProperties
+        from pbf.Commands.PBF.insert_pbf_package import InsertPbfPackage
+
         NewPbfProperties().createPropertiesFile(packagePath)
         InsertPbfPackage().insertPBFPackage(os.path.join('.', packageName), packagePath)
             
     def prepareSetupFile(self, packagePath, packageName):
         """ Prepares the PBF Package Setup file """
+        from pbf.templates import template_manager
+        from pbf_dev_tools.templates import TemplatesRoot
+        import os
+        
         destination = os.path.join(packagePath, "setup.py")
         keywords = {"%PackagePath%":packageName,
                     "%PackageName%":packageName}
