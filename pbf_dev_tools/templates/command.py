@@ -14,9 +14,4 @@ class %CommandClassName%:
     def run(self, arguments):
         """ Run the command """
     
-    def help(self):
-        """ Print Command usage """
-        print "Usage: pbf {category} {command}".format(category=self.category, command=self.command) # ADD ADITIONAL PACKAGE ARGUMENTS
-        print "" # ADD DETAILED DESCRIPTION 
-    
 command_manager.RegisterCommand(%CommandClassName%)

@@ -23,9 +23,4 @@ class %CommandClassName%:
         keywords = {}
         template_manager.CopyTemplate(filepath, """ TEMPLATE_FILENAME """, keywords, TemplatesRoot) # Add proper template file name here
     
-    def help(self):
-        """ Print Command usage """
-        print "Usage: pbf {category} {command}".format(category=self.category, command=self.command) # ADD ADITIONAL PACKAGE ARGUMENTS
-        print "" # ADD DETAILED DESCRIPTION 
-    
 command_manager.RegisterCommand(%CommandClassName%)
