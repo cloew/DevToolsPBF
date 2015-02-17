@@ -4,6 +4,7 @@ from pbf.Commands.PBF.insert_pbf_package import InsertPbfPackage
 from pbf.helpers.file_helper import CreateDirectoryIfItDoesNotExist
 
 from pbf_dev_tools.Commands.mk_templates_dir import MakeTemplatesDirectory
+from pbf_dev_tools.Commands.new_command_map import NewCommandMap
 from pbf_python.Commands.mk_pydir import MakePyDir
 
 from pbf.templates import template_manager
@@ -28,7 +29,7 @@ class MakePBFPackage:
         self.createNewPackage(packagePath, packageName)
         
     def createNewPackage(self, packagePath, packageName):
-        """ Create a new PBF Pacakge """
+        """ Create a new PBF Package """
         CreateDirectoryIfItDoesNotExist(packagePath)
         
         self.createPackageDirectories(packagePath, packageName)
@@ -36,12 +37,13 @@ class MakePBFPackage:
         self.prepareSetupFile(packagePath, packageName)
         
     def createPackageDirectories(self, packagePath, packageName):
-        """ Create Pacakge Directories """
+        """ Create Package Directories """
         currentDirectory = packagePath
         pythonDirectoryMaker = MakePyDir()
         
         currentDirectory = os.path.join(currentDirectory, packageName)
         pythonDirectoryMaker.makePyDir(currentDirectory)
+        NewCommandMap().createCommandMap(currentDirectory)
             
         pythonDirectoryMaker.makePyDir(os.path.join(currentDirectory, "Commands"))
         self.createTemplatesDirectory(currentDirectory)
