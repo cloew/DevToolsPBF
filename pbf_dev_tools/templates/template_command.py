@@ -1,8 +1,9 @@
+from pbf.templates.template_loader import TemplateLoader
 from %PackageRoot%.templates import TemplatesRoot
-from pbf.templates import template_manager
 
 class %CommandClassName%:
     """ ADD DESCRIPTION HERE """
+    TEMPLATE_LOADER = TemplateLoader(""" TEMPLATE_FILENAME """, TemplatesRoot) # Add proper template file name here
                           
     def addArguments(self, parser):
         """ Add arguments to the parser """
@@ -16,4 +17,4 @@ class %CommandClassName%:
     def create%CapitalCommandName%(self, filepath):
         """ Create a %CapitalCommandName% """
         keywords = {}
-        template_manager.CopyTemplate(filepath, """ TEMPLATE_FILENAME """, keywords, TemplatesRoot) # Add proper template file name here
+        self.TEMPLATE_LOADER.copy(filepath, keywords=keywords)

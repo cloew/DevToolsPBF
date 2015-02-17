@@ -5,8 +5,12 @@ from pbf_python.helpers.python_helper import GetPythonPackageRootForFilename
 
 from pbf_dev_tools.Commands.new_command import NewCommand
 
+from pbf.templates.template_loader import TemplateLoader
+from pbf_dev_tools.templates import TemplatesRoot
+
 class NewTemplateCommand(NewCommand):
     """ Command to create a PBF command to copy a template """
+    TEMPLATE_LOADER = TemplateLoader("template_command.py", TemplatesRoot)
         
     def createNewCommand(self, filepath, private=False):
         """ Create the PBF template command """
@@ -18,4 +22,4 @@ class NewTemplateCommand(NewCommand):
         keywords = {"%CapitalCommandName%":commandName.capitalize(),
                     "%PackageRoot%":packageRoot}
                     
-        NewCommand.createNewCommand(self, filepath, template="template_command.py", keywords=keywords, private=private)
+        NewCommand.createNewCommand(self, filepath, keywords=keywords, private=private)
