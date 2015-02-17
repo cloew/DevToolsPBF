@@ -1,4 +1,3 @@
-from pbf.Commands import command_manager
 from pbf.helpers.filename_helper import GetPythonClassnameFromFilename
 
 from pbf_dev_tools.helpers.command_helper import GetCommandClassName, GetCommandCategoryAndCommand
@@ -10,9 +9,6 @@ import os
 
 class NewCommand:
     """ Creates a new PBF Command file """
-    category = "new"
-    command = "command"
-    description = "Create a new PBF command file"
     
     def addArguments(self, parser):
         """ Add arguments to the parser """
@@ -32,10 +28,3 @@ class NewCommand:
                     "%CategoryName%":categoryName,
                     "%CommandName%":commandName}
         template_manager.CopyTemplate(filepath, "command.py", keywords, templates_directory=TemplatesRoot)
-    
-    def help(self):
-        """ Print the Usage of the New Main Command """
-        print "Usage: pbf {category} {command} [path/to/command]".format(category=self.category, command=self.command)
-        print "\tWill create a PBF Command at the path given"
-    
-command_manager.RegisterCommand(NewCommand)

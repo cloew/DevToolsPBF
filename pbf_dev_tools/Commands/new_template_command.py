@@ -1,5 +1,3 @@
-from pbf.Commands import command_manager
-
 from pbf.helpers.file_helper import GetBasename
 from pbf.helpers.filename_helper import GetPythonClassnameFromFilename
 
@@ -11,9 +9,6 @@ from pbf_dev_tools.templates import TemplatesRoot
 
 class NewTemplateCommand:
     """ Command to create a PBF command to copy a template """
-    category = "new"
-    command = "template-command"
-    description = "Creates a command to copy a template file"
     
     def addArguments(self, parser):
         """ Add arguments to the parser """
@@ -41,10 +36,3 @@ class NewTemplateCommand:
                     "%CapitalCommandName%":commandName.capitalize(),
                     "%PackageRoot%":packageRoot}
         template_manager.CopyTemplate(filepath, "template_command.py", keywords, templates_directory=TemplatesRoot)
-    
-    def help(self):
-        """ Print Command usage """
-        print "Usage: pbf {category} {command} [path/to/template-command]".format(category=self.category, command=self.command)
-        print "Creates a command to copy a template file at the given path"
-    
-command_manager.RegisterCommand(NewTemplateCommand)
