@@ -21,10 +21,12 @@ class NewCommand:
         print "Creating PBF Command:", GetPythonClassnameFromFilename(filepath), "at:", filepath
         self.createNewCommand(filepath)
         
-    def createNewCommand(self, filepath):
+    def createNewCommand(self, filepath, template="command.py", keywords=None):
         """ Create a new command at the filepath provided """
+        if keywords is None:
+            keywords = {}
         classname = GetCommandClassName(filepath)
-        keywords = {"%CommandClassName%":classname}
+        keywords["%CommandClassName%"] = classname
         InsertCommandConfig().insertCommandConfig(filepath)
-        template_manager.CopyTemplate(filepath, "command.py", keywords, templates_directory=TemplatesRoot)
+        template_manager.CopyTemplate(filepath, template, keywords, templates_directory=TemplatesRoot)
         
