@@ -1,7 +1,7 @@
 from distutils.core import setup
 
 setup(name='pbf_dev_tools',
-      version='.1',
+      version='.2',
       description="Programmer's Best Friend Utility Extension for pbf_dev_tools",
       author='Chris Loew',
       author_email='cloew123@gmail.com',
