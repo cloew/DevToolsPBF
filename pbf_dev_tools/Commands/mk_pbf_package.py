@@ -1,5 +1,3 @@
-from pbf.Commands import command_manager
-
 from pbf.Commands.PBF.new_pbf_properties import NewPbfProperties
 from pbf.Commands.PBF.insert_pbf_package import InsertPbfPackage
 
@@ -15,9 +13,6 @@ import os
 
 class MakePBFPackage:
     """ Command to make a new PBF Package """
-    category = "mk"
-    command = "pbf-package"
-    description = "Make a PBF Package directory structure"
     
     def addArguments(self, parser):
         """ Add arguments to the parser """
@@ -67,10 +62,3 @@ class MakePBFPackage:
         keywords = {"%PackagePath%":packageName,
                     "%PackageName%":packageName}
         template_manager.CopyTemplate(destination, "setup.py", keywords, templates_directory=TemplatesRoot)
-    
-    def help(self):
-        """ Print Command usage """
-        print "Usage: pbf {category} {command} [path/to/package] [package name]".format(category=self.category, command=self.command)
-        print "Create the PBF Package at the path specified and with the package name given"
-    
-command_manager.RegisterCommand(MakePBFPackage)
