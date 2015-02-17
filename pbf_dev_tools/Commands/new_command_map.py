@@ -1,11 +1,9 @@
-from pbf.helpers.file_helper import IsDirectory
+from pbf.templates.template_loader import TemplateLoader
 from pbf_dev_tools.templates import TemplatesRoot
-from pbf.templates import template_manager
-
-import os
 
 class NewCommandMap:
     """ Command to create a new command map file """
+    TEMPLATE_LOADER = TemplateLoader("command_map.py", TemplatesRoot, defaultFilename="command_map.py")
                           
     def addArguments(self, parser):
         """ Add arguments to the parser """
@@ -18,7 +16,4 @@ class NewCommandMap:
         
     def createCommandMap(self, filepath):
         """ Create a Command Map """
-        if IsDirectory(filepath):
-            filepath = os.path.join(filepath, 'command_map.py')
-        keywords = {}
-        template_manager.CopyTemplate(filepath, "command_map.py", keywords, TemplatesRoot)
+        self.TEMPLATE_LOADER.copy(filepath)
