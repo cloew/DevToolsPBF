@@ -34,4 +34,4 @@ class InsertCommandConfig:
         package = GetPythonPackageForFilename(pathToCommand)
         classname = GetCommandClassName(pathToCommand)
         classPath = "{0}.{1}".format(package, classname)
-        return 'CommandConfig("{0}", {1}, description="{2}")'.format(commandText, classPath, description)
+        return 'CommandConfig("{0}", "{1}", description="{2}")'.format(commandText, classPath, description)
