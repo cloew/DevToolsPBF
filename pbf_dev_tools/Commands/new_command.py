@@ -1,6 +1,7 @@
 from pbf.helpers.filename_helper import GetPythonClassnameFromFilename
 
 from pbf_dev_tools.helpers.command_helper import GetCommandClassName, GetCommandCategoryAndCommand
+from pbf_dev_tools.Commands.insert_command_config import InsertCommandConfig
 
 from pbf.templates import template_manager
 from pbf_dev_tools.templates import TemplatesRoot
@@ -23,8 +24,7 @@ class NewCommand:
     def createNewCommand(self, filepath):
         """ Create a new command at the filepath provided """
         classname = GetCommandClassName(filepath)
-        categoryName, commandName = GetCommandCategoryAndCommand(filepath)
-        keywords = {"%CommandClassName%":classname,
-                    "%CategoryName%":categoryName,
-                    "%CommandName%":commandName}
+        keywords = {"%CommandClassName%":classname}
+        InsertCommandConfig().insertCommandConfig(filepath)
         template_manager.CopyTemplate(filepath, "command.py", keywords, templates_directory=TemplatesRoot)
+        
