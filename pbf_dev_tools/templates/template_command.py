@@ -1,13 +1,8 @@
-from pbf.Commands import command_manager
-
 from %PackageRoot%.templates import TemplatesRoot
 from pbf.templates import template_manager
 
 class %CommandClassName%:
     """ ADD DESCRIPTION HERE """
-    category = "%CategoryName%"
-    command = "%CommandName%"
-    description = "" # ADD DESCRIPTION HERE
                           
     def addArguments(self, parser):
         """ Add arguments to the parser """
@@ -22,5 +17,3 @@ class %CommandClassName%:
         """ Create a %CapitalCommandName% """
         keywords = {}
         template_manager.CopyTemplate(filepath, """ TEMPLATE_FILENAME """, keywords, TemplatesRoot) # Add proper template file name here
-    
-command_manager.RegisterCommand(%CommandClassName%)
