@@ -2,6 +2,7 @@ from pbf.Commands.PBF.new_pbf_properties import NewPbfProperties
 from pbf.Commands.PBF.insert_pbf_package import InsertPbfPackage
 
 from pbf.helpers.file_helper import CreateDirectoryIfItDoesNotExist
+from pbf.helpers.PBF.properties_helper import FindPBFPropertiesFilename
 
 from pbf_dev_tools.Commands.mk_templates_dir import MakeTemplatesDirectory
 from pbf_dev_tools.Commands.new_command_map import NewCommandMap
@@ -57,6 +58,7 @@ class MakePBFPackage:
     def createPBFProperties(self, packagePath, packageName):
         """ Creates the templates Directory in the directory given """
         NewPbfProperties().createPropertiesFile(packagePath)
+        FindPBFPropertiesFilename(startFrom=packagePath, reload=True)
         InsertPbfPackage().insertPBFPackages([os.path.join('.', packageName), 'pbf_dev_tools'], startFrom=packagePath)
             
     def prepareSetupFile(self, packagePath, packageName):
