@@ -7,13 +7,14 @@ from pbf_dev_tools.Commands.mk_templates_dir import MakeTemplatesDirectory
 from pbf_dev_tools.Commands.new_command_map import NewCommandMap
 from pbf_python.Commands.mk_pydir import MakePyDir
 
-from pbf.templates import template_manager
+from pbf.templates.template_loader import TemplateLoader
 from pbf_dev_tools.templates import TemplatesRoot
 
 import os
 
 class MakePBFPackage:
     """ Command to make a new PBF Package """
+    TEMPLATE_LOADER = TemplateLoader("setup.py", TemplatesRoot, defaultFilename="setup.py")
     
     def addArguments(self, parser):
         """ Add arguments to the parser """
@@ -56,11 +57,10 @@ class MakePBFPackage:
     def createPBFProperties(self, packagePath, packageName):
         """ Creates the templates Directory in the directory given """
         NewPbfProperties().createPropertiesFile(packagePath)
-        InsertPbfPackage().insertPBFPackage(os.path.join('.', packageName), packagePath)
+        InsertPbfPackage().insertPBFPackages([os.path.join('.', packageName), 'pbf_dev_tools'], startFrom=packagePath)
             
     def prepareSetupFile(self, packagePath, packageName):
         """ Prepares the PBF Package Setup file """
-        destination = os.path.join(packagePath, "setup.py")
         keywords = {"%PackagePath%":packageName,
                     "%PackageName%":packageName}
-        template_manager.CopyTemplate(destination, "setup.py", keywords, templates_directory=TemplatesRoot)
+        self.TEMPLATE_LOADER.copy(packagePath, keywords=keywords)
